@@ -44,5 +44,10 @@ namespace POSTerminal.Database
         {
             return new SqlCommand("", conn, tran);
         }
+
+        public SqlCommand CreateCommand(string commandText)
+        {
+            return new SqlCommand(commandText, conn, tran);
+        }
     }
 }

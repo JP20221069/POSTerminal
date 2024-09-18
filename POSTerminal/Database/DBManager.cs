@@ -1,5 +1,7 @@
-﻿using System;
+﻿using POSTerminal.Model;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +29,78 @@ namespace POSTerminal.Database
         public void BeginTransaction()
         {
             conn.BeginTransaction();
+        }
+
+        public DALObject GetList(IModelObject obj,List<SqlParameter> parameters = null)
+        {
+            DALObject retDalOb = new DALObject(DALObjectType.List, "", obj);
+            conn.OpenConnection();
+            BeginTransaction();
+            try
+            {
+                SqlCommand comm = conn.CreateCommand("EXEC "+obj.ProcedureName);
+                if(parameters!=null)
+                {
+                    comm.Parameters.AddRange(parameters.ToArray());
+                }
+                retDalOb.GetValueList(comm.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                Rollback();
+                throw ex;
+            }
+            finally
+            {
+                Commit();
+                conn.CloseConnection();
+            }
+            return retDalOb;
+        }
+
+        public DALObject GetSingle(IModelObject obj, List<SqlParameter> parameters = null)
+        {
+            try
+            {
+                DALObject dalobj = GetList(obj, parameters);
+                object x = ((List<object>)dalobj.Values)[0];
+                DALObject retdalobj = new DALObject(DALObjectType.Single, "", obj);
+                retdalobj.Values = x;
+                return retdalobj;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool Prijava(string JMBG)
+        {
+            conn.OpenConnection();
+            BeginTransaction();
+            try
+            {
+                SqlCommand comm = conn.CreateCommand("SELECT dbo.PRIJAVA_KASIRA('" + JMBG + "') AS x;");
+                int x = Convert.ToInt32(comm.ExecuteScalar());
+                if(x==1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                Rollback();
+                throw ex;
+            }
+            finally
+            {
+                Commit();
+                conn.CloseConnection();
+            }
         }
     }
 }
