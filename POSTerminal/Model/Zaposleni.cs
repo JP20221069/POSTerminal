@@ -1,5 +1,7 @@
-﻿using System;
+﻿using POSTerminal.Database;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,29 +16,49 @@ namespace POSTerminal.Model
 
         public string[] ColumnNames => new string[]{"JMBG","Ime","Prezime","Status","SefID"};
 
+        public Dictionary<string, string> FieldColumnMap => new Dictionary<string, string>()
+        {
+            {"Sef","ŠefID" }
+        };
+
+        public Dictionary<string, Func<object,object>> ConversionMap => new Dictionary<string, Func<object,object>>()
+        {
+            ["SefID"] = (jmbgx) =>
+            {
+                if (jmbgx.ToString()=="") return null;
+                DBManager db = new DBManager();
+                List<SqlParameter> sqop = new List<SqlParameter>();
+                sqop.Add(new SqlParameter("JMBG", (string)jmbgx));
+                DALObject da = db.GetSingle(new Zaposleni(), sqop);
+                return (Zaposleni)da.Values;
+            }
+        };
+
         string jmbg;
         string ime;
         string prezime;
         StatusZaposlenog status;
-        long sefID;
+
+        Zaposleni sef;
 
         public string JMBG { get => jmbg; set => jmbg = value; }
         public string Ime { get => ime; set => ime = value; }
         public string Prezime { get => prezime; set => prezime = value; }
         internal StatusZaposlenog Status { get => status; set => status = value; }
-        public long SefID { get => sefID; set => sefID = value; }
+        internal Zaposleni Sef { get => sef; set => sef = value; }
+
+        public string Values => throw new NotImplementedException();
 
         public Zaposleni()
         {
             
         }
-        public Zaposleni(string jmbg, string ime, string prezime, StatusZaposlenog status, long sefID)
+        public Zaposleni(string jmbg, string ime, string prezime, StatusZaposlenog status)
         {
             JMBG = jmbg;
             Ime = ime;
             Prezime = prezime;
             Status = status;
-            SefID = sefID;
         }
 
 

@@ -8,10 +8,10 @@ namespace POSTerminal
 {
     public class FiskalnaIntegracija
     {
-        public static string GenerisiBR()
+       /* public static string GenerisiBR()
         {
 
-        }
+        }*/
 
 
     }

@@ -70,11 +70,16 @@
       <DependentUpon>FrmPrijava.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\IModelObject.cs" />
+    <Compile Include="Model\Mesto.cs" />
     <Compile Include="Model\NacinPlacanja.cs" />
+    <Compile Include="Model\Opstina.cs" />
     <Compile Include="Model\PoreskaGrupa.cs" />
+    <Compile Include="Model\Preduzece.cs" />
+    <Compile Include="Model\ProdajnoMesto.cs" />
     <Compile Include="Model\Proizvod.cs" />
     <Compile Include="Model\Racun.cs" />
     <Compile Include="Model\StatusZaposlenog.cs" />
+    <Compile Include="Model\StavkaRacuna.cs" />
     <Compile Include="Model\Zaposleni.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

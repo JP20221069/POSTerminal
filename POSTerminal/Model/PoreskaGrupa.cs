@@ -22,6 +22,12 @@ namespace POSTerminal.Model
         public char Akronim { get { return this.akronim; } set { this.akronim = value; } }
         public float Stopa { get { return this.stopa; } set { this.stopa = value; } }
 
+        public Dictionary<string, string> FieldColumnMap => new Dictionary<string, string>();
+
+        public Dictionary<string, Func<object, object>> ConversionMap => new Dictionary<string, Func<object, object>>();
+
+        public string Values => throw new NotImplementedException();
+
         public PoreskaGrupa()
         {
             

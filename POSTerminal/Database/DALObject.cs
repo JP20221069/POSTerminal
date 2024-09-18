@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POSTerminal.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -16,7 +17,7 @@ namespace POSTerminal.Database
         object values;
         DALObjectType type;
         object model_object;
-
+        
         
 
         public DALObject(DALObjectType t, string name, object model_object)
@@ -52,7 +53,7 @@ namespace POSTerminal.Database
 
         public void GetValueList(SqlDataReader reader, List<string> avoid_fields=null)
         {
-            string[] avoid = new string[] { "TableName", "ProcedureName", "ColumnNames" };
+            string[] avoid = new string[] { "TableName", "ProcedureName", "ColumnNames","FieldColumnMap","ConversionMap" };
             if(avoid_fields!=null)
             {
                 avoid = avoid.Concat(avoid_fields.ToArray()).ToArray();
@@ -72,11 +73,37 @@ namespace POSTerminal.Database
                     }
                     else
                     {
+                        Dictionary<string, Func<object,object>> convmap = ((IModelObject)model_object).ConversionMap;
+                        Dictionary<string, string> fcmap = ((IModelObject)model_object).FieldColumnMap;
                         foreach (string name in Fields)
                         {
                             if (!avoid.Contains(name))
                             {
-                                obj.GetType().GetProperty(name).SetValue(obj, Convert.ChangeType(reader[name], obj.GetType().GetProperty(name).PropertyType));
+                                object temp = new object();
+                                if (fcmap.ContainsKey(name))
+                                {
+                                    if (convmap.ContainsKey(name))
+                                    {
+                                        temp = convmap[name](reader[fcmap[name]]);
+                                        obj.GetType().GetProperty(name).SetValue(obj, temp);
+                                    }
+                                    else
+                                    {
+                                        obj.GetType().GetProperty(name).SetValue(obj, Convert.ChangeType(reader[fcmap[name]], obj.GetType().GetProperty(name).PropertyType));
+                                    }
+                                }
+                                else
+                                {
+                                    if (convmap.ContainsKey(name))
+                                    {
+                                        temp = convmap[name](reader[name]);
+                                        obj.GetType().GetProperty(name).SetValue(obj, temp);
+                                    }
+                                    else
+                                    {
+                                        obj.GetType().GetProperty(name).SetValue(obj, Convert.ChangeType(reader[name], obj.GetType().GetProperty(name).PropertyType));
+                                    }
+                                }
                             }
                         }
                     }

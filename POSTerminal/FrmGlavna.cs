@@ -1,4 +1,6 @@
-﻿using System;
+﻿using POSTerminal.Database;
+using POSTerminal.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -69,6 +71,7 @@ namespace POSTerminal
 
         private void btEnter_Click(object sender, EventArgs e)
         {
+
             FIELD_DISPLAY.Text = "";
         }
 
@@ -82,6 +85,19 @@ namespace POSTerminal
 
         private void btScan_Click(object sender, EventArgs e)
         {
+            SimuScan ss = new SimuScan();
+            ss.target = this.FIELD_DISPLAY;
+            DBManager db = new DBManager();
+            DALObject dao = db.GetList(new Proizvod());
+            List<object> p = (List<object>)dao.Values;
+            List<CBObject> cbo = new List<CBObject>();
+            foreach (object o in p)
+            {
+                Proizvod pr = (Proizvod)o;
+                cbo.Add(new CBObject(pr.ID, pr.Naziv + " | " + pr.ID));
+            }
+            ss.displaylist = cbo;
+            ss.Show();
 
         }
 

@@ -13,5 +13,11 @@ namespace POSTerminal.Model
         string ProcedureName { get; }
 
         string[] ColumnNames { get; }
+
+        string Values { get; }
+
+        Dictionary<string,string> FieldColumnMap { get; }
+
+        Dictionary<string,Func<object,object>> ConversionMap { get; }
     }
 }

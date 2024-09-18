@@ -17,38 +17,42 @@ namespace POSTerminal.Model
         public string[] ColumnNames => throw new NotImplementedException();
 
         public int ID { get { return this.id; } set { this.id = value; } }
-        public int Naziv { get { return this.naziv; } set { this.naziv = value; } }
+        public string Naziv { get { return this.naziv; } set { this.naziv = value; } }
         public float Cena { get { return this.cena; } set { this.cena = value; } }
-        public PoreskaGrupa PoreskaGrupaObj { get { return this.poreskagrupa; } set { this.poreskagrupa = value; } }
+        public PoreskaGrupa PoreskaGrupa { get { return this.poreskagrupa; } set { this.poreskagrupa = value; } }
 
-        public int Poreska_Grupa
+        public Dictionary<string, string> FieldColumnMap => new Dictionary<string, string>()
         {
-            get { return this.poreska_grupa; }
-            set
-            {
-                this.poreska_grupa = value;
+            { "PoreskaGrupa","Poreska_Grupa" }
+        };
+
+        public Dictionary<string, Func<object, object>> ConversionMap => new Dictionary<string, Func<object, object>>()
+        {
+            ["PoreskaGrupa"] = (poreskagrupaid)=>{
                 DBManager db = new DBManager();
-                List<SqlParameter> lista = new List<SqlParameter>();
-                lista.Add(new SqlParameter("ID", this.poreska_grupa.ToString()));
-                this.poreskagrupa = (PoreskaGrupa)db.GetSingle(PoreskaGrupaObj, lista).Values;
+                List<SqlParameter> sqop = new List<SqlParameter>();
+                sqop.Add(new SqlParameter("ID", poreskagrupaid.ToString()));
+                DALObject da = db.GetSingle(new PoreskaGrupa(), sqop);
+                return (PoreskaGrupa)da.Values;
             }
-        }
+        };
+
+        public string Values => throw new NotImplementedException();
 
         int id;
-        int naziv;
+        string naziv;
         float cena;
-        int poreska_grupa;
         PoreskaGrupa poreskagrupa;
         public Proizvod()
         {
             
         }
-        public Proizvod(int id, int naziv, float cena, PoreskaGrupa poreskaGrupa)
+        public Proizvod(int id, string naziv, float cena, PoreskaGrupa poreskaGrupa)
         {
             ID = id;
             Naziv = naziv;
             Cena = cena;
-            PoreskaGrupaObj = poreskaGrupa;
+            this.poreskagrupa = poreskaGrupa;
         }
     }
 }

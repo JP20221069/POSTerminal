@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,6 +42,19 @@ namespace POSTerminal.Database
                 SqlCommand comm = conn.CreateCommand("EXEC "+obj.ProcedureName);
                 if(parameters!=null)
                 {
+                    string temp = " ";
+                    for(int i=0;i<parameters.Count;i++)
+                    {
+                        if (i < parameters.Count - 1)
+                        {
+                            temp += "@" + parameters[i].ParameterName + ",";
+                        }
+                        else
+                        {
+                            temp += "@" + parameters[i].ParameterName + ";";
+                        }
+                    }
+                    comm.CommandText += temp;
                     comm.Parameters.AddRange(parameters.ToArray());
                 }
                 retDalOb.GetValueList(comm.ExecuteReader());
@@ -57,6 +71,7 @@ namespace POSTerminal.Database
             }
             return retDalOb;
         }
+
 
         public DALObject GetSingle(IModelObject obj, List<SqlParameter> parameters = null)
         {
@@ -102,5 +117,15 @@ namespace POSTerminal.Database
                 conn.CloseConnection();
             }
         }
+
+        public void Add(IModelObject obj)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = $"INSERT INTO {obj.TableName}({obj.ColumnNames}) VALUES({obj.Values} )";
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+        }
+
+
     }
 }

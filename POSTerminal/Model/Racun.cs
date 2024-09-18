@@ -34,6 +34,22 @@ namespace POSTerminal.Model
 
         public string[] ColumnNames => throw new NotImplementedException();
 
+        public Dictionary<string, string> FieldColumnMap => new Dictionary<string, string>()
+        {
+            { "BrojRačuna","BrojRacuna" },
+            { "ESIRBroj","ESIRBroj" },
+            { "Datum","Datum" },
+            { "Vreme","Vreme" },
+            { "PFRVreme","PFRVreme" },
+            { "PFRBroj","PFRBroj" },
+            { "NačinPlacanja","NacinPlacanja" },
+            //{ "ProdajnoMesto"}
+        };
+
+        public Dictionary<string, Func<object, object>> ConversionMap => throw new NotImplementedException();
+
+        public string Values => throw new NotImplementedException();
+
         public Racun()
         {
             
