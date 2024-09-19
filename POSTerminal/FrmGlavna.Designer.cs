@@ -31,6 +31,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.Kasa = new System.Windows.Forms.GroupBox();
+            this.button10 = new System.Windows.Forms.Button();
+            this.btAddPr = new System.Windows.Forms.Button();
             this.btBackSpace = new System.Windows.Forms.Button();
             this.btDelPr = new System.Windows.Forms.Button();
             this.btScan = new System.Windows.Forms.Button();
@@ -48,7 +50,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.FIELD_DISPLAY = new System.Windows.Forms.TextBox();
-            this.btAddPr = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.Kasa.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +61,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(417, 687);
+            this.groupBox1.Size = new System.Drawing.Size(417, 795);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Proizvodi";
@@ -73,11 +74,12 @@
             this.listBox1.ItemHeight = 19;
             this.listBox1.Location = new System.Drawing.Point(3, 47);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(411, 637);
+            this.listBox1.Size = new System.Drawing.Size(411, 745);
             this.listBox1.TabIndex = 0;
             // 
             // Kasa
             // 
+            this.Kasa.Controls.Add(this.button10);
             this.Kasa.Controls.Add(this.btAddPr);
             this.Kasa.Controls.Add(this.btBackSpace);
             this.Kasa.Controls.Add(this.btDelPr);
@@ -100,10 +102,34 @@
             this.Kasa.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Kasa.Location = new System.Drawing.Point(417, 0);
             this.Kasa.Name = "Kasa";
-            this.Kasa.Size = new System.Drawing.Size(697, 687);
+            this.Kasa.Size = new System.Drawing.Size(697, 795);
             this.Kasa.TabIndex = 1;
             this.Kasa.TabStop = false;
             this.Kasa.Text = "Kasa";
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.Firebrick;
+            this.button10.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button10.ForeColor = System.Drawing.Color.White;
+            this.button10.Location = new System.Drawing.Point(10, 687);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(127, 99);
+            this.button10.TabIndex = 20;
+            this.button10.Text = "CLR";
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click_1);
+            // 
+            // btAddPr
+            // 
+            this.btAddPr.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btAddPr.Location = new System.Drawing.Point(10, 582);
+            this.btAddPr.Name = "btAddPr";
+            this.btAddPr.Size = new System.Drawing.Size(127, 99);
+            this.btAddPr.TabIndex = 19;
+            this.btAddPr.Text = "AddPR";
+            this.btAddPr.UseVisualStyleBackColor = true;
+            this.btAddPr.Click += new System.EventHandler(this.btAddPr_Click);
             // 
             // btBackSpace
             // 
@@ -302,26 +328,17 @@
             this.FIELD_DISPLAY.TabIndex = 0;
             this.FIELD_DISPLAY.Text = "P O S T e r m . . .";
             // 
-            // btAddPr
-            // 
-            this.btAddPr.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btAddPr.Location = new System.Drawing.Point(10, 582);
-            this.btAddPr.Name = "btAddPr";
-            this.btAddPr.Size = new System.Drawing.Size(127, 99);
-            this.btAddPr.TabIndex = 19;
-            this.btAddPr.Text = "AddPR";
-            this.btAddPr.UseVisualStyleBackColor = true;
-            // 
             // FrmGlavna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1114, 687);
+            this.ClientSize = new System.Drawing.Size(1114, 795);
             this.Controls.Add(this.Kasa);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmGlavna";
             this.Text = "POSTerm v1.0. - Kasa";
+            this.Load += new System.EventHandler(this.FrmGlavna_Load);
             this.groupBox1.ResumeLayout(false);
             this.Kasa.ResumeLayout(false);
             this.Kasa.PerformLayout();
@@ -352,5 +369,6 @@
         private System.Windows.Forms.Button btBackSpace;
         private System.Windows.Forms.Button btDelPr;
         private System.Windows.Forms.Button btAddPr;
+        private System.Windows.Forms.Button button10;
     }
 }

@@ -53,7 +53,7 @@ namespace POSTerminal.Database
 
         public void GetValueList(SqlDataReader reader, List<string> avoid_fields=null)
         {
-            string[] avoid = new string[] { "TableName", "ProcedureName", "ColumnNames","FieldColumnMap","ConversionMap" };
+            string[] avoid = new string[] { "TableName", "ProcedureName", "ColumnNames","FieldColumnMap","ConversionMap","Values" };
             if(avoid_fields!=null)
             {
                 avoid = avoid.Concat(avoid_fields.ToArray()).ToArray();

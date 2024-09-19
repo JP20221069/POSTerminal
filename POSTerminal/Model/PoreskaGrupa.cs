@@ -12,7 +12,7 @@ namespace POSTerminal.Model
 
         public string ProcedureName => "GetPoreskaGrupaBy";
 
-        public string[] ColumnNames => throw new NotImplementedException();
+        public string ColumnNames => throw new NotImplementedException();
 
         int id;
         char akronim;

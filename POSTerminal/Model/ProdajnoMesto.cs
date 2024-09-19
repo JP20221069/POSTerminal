@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace POSTerminal.Model
 {
-    class ProdajnoMesto : IModelObject
+    public class ProdajnoMesto : IModelObject
     {
         int id;
         string pib;
@@ -16,6 +16,11 @@ namespace POSTerminal.Model
         string ulica;
         string broj;
         string naziv;
+
+        public ProdajnoMesto()
+        {
+            
+        }
 
         public ProdajnoMesto(int id, string pib, Mesto mesto, string ulica, string broj, string naziv)
         {
@@ -37,7 +42,7 @@ namespace POSTerminal.Model
 
         public string ProcedureName => "GetProdajnoMestoBy";
 
-        public string[] ColumnNames => throw new NotImplementedException();
+        public string ColumnNames => throw new NotImplementedException();
 
         public Dictionary<string, string> FieldColumnMap => new Dictionary<string, string>()
         {
@@ -57,6 +62,6 @@ namespace POSTerminal.Model
 
         public string Values => throw new NotImplementedException();
 
-        internal Mesto Mesto { get => mesto; set => mesto = value; }
+        public Mesto Mesto { get => mesto; set => mesto = value; }
     }
 }

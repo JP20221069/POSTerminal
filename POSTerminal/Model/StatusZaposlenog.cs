@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POSTerminal.Model
 {
-    enum StatusZaposlenog
+    public enum StatusZaposlenog
     {
         Zaposleni=0,
         Kasir,

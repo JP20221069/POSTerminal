@@ -118,12 +118,127 @@ namespace POSTerminal.Database
             }
         }
 
+        public int PrijavaMenadzera(string JMBG)
+        {
+            conn.OpenConnection();
+            BeginTransaction();
+            try
+            {
+                SqlCommand comm = conn.CreateCommand("SELECT dbo.PRIJAVA_MENADŽERA('" + JMBG + "') AS x;");
+                object objx = comm.ExecuteScalar();
+                int x;
+                if (objx != null) x = Convert.ToInt32(objx);
+                else x = -1;
+                return x;
+            }
+            catch (Exception ex)
+            {
+                Rollback();
+                throw ex;
+            }
+            finally
+            {
+                Commit();
+                conn.CloseConnection();
+            }
+        }
+
+
+        public int GetBrojKasira(string JMBG)
+        {
+            conn.OpenConnection();
+            BeginTransaction();
+            try
+            {
+                SqlCommand comm = conn.CreateCommand("SELECT dbo.FI_BROJ_KASIRA('" + JMBG + "') AS x;");
+                int x = Convert.ToInt32(comm.ExecuteScalar());
+                return x;
+            }
+            catch (Exception ex)
+            {
+                Rollback();
+                throw ex;
+            }
+            finally
+            {
+                Commit();
+                conn.CloseConnection();
+            }
+        }
+
+        public string GetNajnovijiBrojacRacuna()
+        {
+            conn.OpenConnection();
+            BeginTransaction();
+            try
+            {
+                SqlCommand comm = conn.CreateCommand("EXEC FI_BROJAČ_RAČUNA;");
+                object x = comm.ExecuteScalar();
+                if(x==null)
+                {
+                    return null;
+                }
+                return x.ToString(); ;
+            }
+            catch (Exception ex)
+            {
+                Rollback();
+                throw ex;
+            }
+            finally
+            {
+                Commit();
+                conn.CloseConnection();
+            }
+        }
+
+        public void Storniraj(Racun r, List<StavkaRacuna> sr,int sifraMenadzera)
+        {
+            conn.OpenConnection();
+            BeginTransaction();
+            try
+            {
+                foreach (StavkaRacuna s in sr)
+                {
+                    SqlCommand comm = conn.CreateCommand("EXEC STORNIRAJ_RAČUN @BrojRačuna='" + s.BrojRacuna + "', @IDStavke=" + s.ID + ",@ŠifraMenadžera=" + sifraMenadzera);
+                    comm.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Rollback();
+                throw ex;
+            }
+            finally
+            {
+                Commit();
+                conn.CloseConnection();
+            }
+        }
+
         public void Add(IModelObject obj)
         {
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = $"INSERT INTO {obj.TableName}({obj.ColumnNames}) VALUES({obj.Values} )";
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
+
+            conn.OpenConnection();
+            BeginTransaction();
+            try
+            {
+                SqlCommand comm = conn.CreateCommand();
+                comm.CommandText = $"EXEC ExecuteRawQuery N'INSERT INTO {obj.TableName}({obj.ColumnNames}) VALUES({obj.Values} )'";
+                comm.ExecuteNonQuery();
+                comm.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Rollback();
+                throw ex;
+            }
+            finally
+            {
+                Commit();
+                conn.CloseConnection();
+            }
+
         }
 
 

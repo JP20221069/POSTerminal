@@ -8,7 +8,7 @@ namespace POSTerminal.Model
 {
     public enum NacinPlacanja
     {
-        Kes,
+        Kes=0,
         Kartica
     }
 }

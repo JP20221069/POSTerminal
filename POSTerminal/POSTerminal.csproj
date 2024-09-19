@@ -51,11 +51,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CBObject.cs" />
+    <Compile Include="CountDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CountDialog.Designer.cs">
+      <DependentUpon>CountDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database\DALObject.cs" />
     <Compile Include="Database\DALObjectException.cs" />
     <Compile Include="Database\DALObjectType.cs" />
     <Compile Include="Database\DBConnection.cs" />
     <Compile Include="Database\DBManager.cs" />
+    <Compile Include="Effects.cs" />
     <Compile Include="FiskalnaIntegracija.cs" />
     <Compile Include="FrmGlavna.cs">
       <SubType>Form</SubType>
@@ -69,6 +76,12 @@
     <Compile Include="FrmPrijava.Designer.cs">
       <DependentUpon>FrmPrijava.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManagerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManagerDialog.Designer.cs">
+      <DependentUpon>ManagerDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\IModelObject.cs" />
     <Compile Include="Model\Mesto.cs" />
     <Compile Include="Model\NacinPlacanja.cs" />
@@ -81,6 +94,18 @@
     <Compile Include="Model\StatusZaposlenog.cs" />
     <Compile Include="Model\StavkaRacuna.cs" />
     <Compile Include="Model\Zaposleni.cs" />
+    <Compile Include="PaymentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PaymentDialog.Designer.cs">
+      <DependentUpon>PaymentDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintPreview.Designer.cs">
+      <DependentUpon>PrintPreview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimuScan.cs">
@@ -89,11 +114,23 @@
     <Compile Include="SimuScan.Designer.cs">
       <DependentUpon>SimuScan.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CountDialog.resx">
+      <DependentUpon>CountDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGlavna.resx">
       <DependentUpon>FrmGlavna.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPrijava.resx">
       <DependentUpon>FrmPrijava.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagerDialog.resx">
+      <DependentUpon>ManagerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaymentDialog.resx">
+      <DependentUpon>PaymentDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintPreview.resx">
+      <DependentUpon>PrintPreview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -133,6 +170,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\filter_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\RacunCyr.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\RacunLat.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\credit_card.png" />
+    <None Include="Resources\100din.jpg" />
+    <Content Include="Sounds\BUTTON.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\SCANBEEP.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

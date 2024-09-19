@@ -12,7 +12,7 @@ namespace POSTerminal.Model
 
         string ProcedureName { get; }
 
-        string[] ColumnNames { get; }
+        string ColumnNames { get; }
 
         string Values { get; }
 

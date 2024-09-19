@@ -12,7 +12,7 @@ namespace POSTerminal.Model
 
         public string ProcedureName => "GetPreduzećeBy";
 
-        public string[] ColumnNames => throw new NotImplementedException();
+        public string ColumnNames => throw new NotImplementedException();
 
         public Dictionary<string, string> FieldColumnMap => new Dictionary<string, string>();
 

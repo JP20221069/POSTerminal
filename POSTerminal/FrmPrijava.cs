@@ -42,6 +42,9 @@ namespace POSTerminal
             {
                 if(db.Prijava(txtScan.Text))
                 {
+                    int brojkasira = db.GetBrojKasira(txtScan.Text);
+                    FrmGlavna.brojkasira = brojkasira;
+                    FrmGlavna.jmbg = txtScan.Text;
                     new FrmGlavna().Show();
                 }
                 else

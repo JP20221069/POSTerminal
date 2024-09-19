@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POSTerminal.Model
 {
-    class Opstina : IModelObject
+    public class Opstina : IModelObject
     {
         int id;
         string naziv;
@@ -32,7 +32,7 @@ namespace POSTerminal.Model
 
         public string ProcedureName => "GetOpštinaBy";
 
-        public string[] ColumnNames => throw new NotImplementedException();
+        public string ColumnNames => throw new NotImplementedException();
 
         public Dictionary<string, string> FieldColumnMap => new Dictionary<string, string>();
 

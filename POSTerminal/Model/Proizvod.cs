@@ -14,7 +14,7 @@ namespace POSTerminal.Model
 
         public string ProcedureName => "GetProizvodBy";
 
-        public string[] ColumnNames => throw new NotImplementedException();
+        public string ColumnNames => throw new NotImplementedException();
 
         public int ID { get { return this.id; } set { this.id = value; } }
         public string Naziv { get { return this.naziv; } set { this.naziv = value; } }

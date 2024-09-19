@@ -30,7 +30,9 @@ namespace POSTerminal
         {
             if (listBox1.SelectedItem != null)
             {
+                Effects.playsimplesound("Sounds/SCANBEEP.wav");
                 target.Text = listBox1.SelectedValue.ToString();
+                target.Focus();
             }
             else
             {

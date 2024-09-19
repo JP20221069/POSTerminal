@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace POSTerminal.Model
 {
-    class Zaposleni : IModelObject
+    public class Zaposleni : IModelObject
     {
         public string TableName => throw new NotImplementedException();
 
         public string ProcedureName => "GetZaposleniBy";
 
-        public string[] ColumnNames => new string[]{"JMBG","Ime","Prezime","Status","SefID"};
+        public string ColumnNames => "JMBG,Ime,Prezime,Status,SefID";
 
         public Dictionary<string, string> FieldColumnMap => new Dictionary<string, string>()
         {

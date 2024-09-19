@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace POSTerminal.Model
 {
-    class Mesto : IModelObject
+    public class Mesto : IModelObject
     {
 
         public string TableName => throw new NotImplementedException();
 
         public string ProcedureName => "GetMestoBy";
 
-        public string[] ColumnNames => throw new NotImplementedException();
+        public string ColumnNames => throw new NotImplementedException();
 
         public Dictionary<string, string> FieldColumnMap => new Dictionary<string, string>()
         {
@@ -37,6 +37,8 @@ namespace POSTerminal.Model
         public int ID { get => id; set => id = value; }
         public string Naziv { get => naziv; set => naziv = value; }
         public string PostanskiBroj { get => postanskibroj; set => postanskibroj = value; }
+
+        public Opstina Opstina { get; set; }
 
         public string Values => throw new NotImplementedException();
 

@@ -1,0 +1,46 @@
+======== FISKALNI RAČUN ========
+	    <PIB>
+	  <COM_NAME>
+	  <PM_NAME>
+	<PM_ADDRESS>
+	<CITYANDMUNICIP>
+Kasir:		       <CASHIER>
+ESIR broj:
+------- PROMET PRODAJA ---------
+Artikli
+================================
+Naziv	  Cena	  Kol.    Ukupno
+<ART>
+
+
+
+
+--------------------------------
+Ukupan izos:		<TOTAL>
+<TYPE> 		<CASH>
+<RETURNIF>		<RETURN>
+================================
+Oznaka	Ime	Stopa	   Porez
+<TAX>
+--------------------------------
+Ukupan iznos poreza:  <TAXTOTAL>
+--------------------------------
+PFR vreme: <PFR_TIME>
+PFR broj računa:
+	<PFR_COUNTER>
+Brojač računa: <BILL_NO>
+================================
+MESTO ZA QR KOD
+
+
+
+
+
+
+
+
+
+
+
+
+==== KRAJ FISKALNOG RAČUNA ====

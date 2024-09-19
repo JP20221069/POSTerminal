@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace POSTerminal.Model
 {
-    class StavkaRacuna : IModelObject
+    public class StavkaRacuna : IModelObject
     {
         int id;
         string brojracuna;
@@ -17,16 +18,19 @@ namespace POSTerminal.Model
         bool storno;
         Zaposleni odobravastorno;
 
-        public string TableName => throw new NotImplementedException();
+        public string TableName => "STAVKA_RAČUNA";
 
-        public string ProcedureName => throw new NotImplementedException();
+        public string ProcedureName => "GetStavkaRačunaBy";
 
-        public string[] ColumnNames => throw new NotImplementedException();
+        public string ColumnNames => "BrojRačuna, ProizvodID, Količina, Storno, OdobravaStorno";
+
+        public string Values => "''" + brojracuna + "''," + proizvod.ID + "," + kolicina.ToString(CultureInfo.InvariantCulture) + ",0,NULL";
 
         public Dictionary<string, string> FieldColumnMap => new Dictionary<string, string>()
         {
             {"BrojRacuna","BrojRačuna" },
-            {"Kolicina","Količina" }
+            {"Kolicina","Količina" },
+            { "Proizvod","ProizvodID"}
         };
 
         public Dictionary<string, Func<object, object>> ConversionMap => new Dictionary<string, Func<object, object>>()
@@ -38,6 +42,14 @@ namespace POSTerminal.Model
                 sqop.Add(new SqlParameter("JMBG", zaposleniid.ToString()));
                 DALObject da = db.GetSingle(new Zaposleni(), sqop);
                 return (Zaposleni)da.Values;
+            },
+            ["Proizvod"] = (proizvodid) =>
+            {
+                DBManager db = new DBManager();
+                List<SqlParameter> sqop = new List<SqlParameter>();
+                sqop.Add(new SqlParameter("ID", proizvodid.ToString()));
+                DALObject da = db.GetSingle(new Proizvod(), sqop);
+                return (Proizvod)da.Values;
             }
         };
 
@@ -48,7 +60,7 @@ namespace POSTerminal.Model
         public bool Storno { get => storno; set => storno = value; }
         internal Zaposleni OdobravaStorno { get => odobravastorno; set => odobravastorno = value; }
 
-        public string Values => throw new NotImplementedException();
+
 
         public StavkaRacuna()
         {
@@ -62,6 +74,11 @@ namespace POSTerminal.Model
             this.Kolicina = kolicina;
             this.Storno = storno;
             this.OdobravaStorno = odobravastorno;
+        }
+
+        public override string ToString()
+        {
+            return this.proizvod.Naziv + " | " + this.kolicina;
         }
     }
 }
