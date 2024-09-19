@@ -172,6 +172,10 @@
     <None Include="Resources\filter_remove.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Logo.ico" />
+    <Content Include="Sounds\PRINTER.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\RacunCyr.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

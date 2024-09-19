@@ -10,7 +10,7 @@ namespace POSTerminal.Model
 {
     public class Zaposleni : IModelObject
     {
-        public string TableName => throw new NotImplementedException();
+        public string TableName => "ZAPOSLENI";
 
         public string ProcedureName => "GetZaposleniBy";
 

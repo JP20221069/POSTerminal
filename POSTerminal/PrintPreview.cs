@@ -19,7 +19,7 @@ namespace POSTerminal
 
         private void PrintPreview_Load(object sender, EventArgs e)
         {
-
+            Effects.playsimplesound("Sounds/PRINTER.wav");
         }
     }
 }

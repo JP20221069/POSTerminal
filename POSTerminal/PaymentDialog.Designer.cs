@@ -93,6 +93,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btkartica);
             this.Name = "PaymentDialog";
+            this.ShowIcon = false;
             this.Text = "Način plaćanja";
             this.Load += new System.EventHandler(this.PaymentDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

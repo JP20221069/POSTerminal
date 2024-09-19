@@ -212,6 +212,11 @@ namespace POSTerminal
         private void btFinish_Click(object sender, EventArgs e)
         {
             float sum = 0.0f;
+            if(stavke.Count==0)
+            {
+                MessageBox.Show("Nema stavki na računu.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             foreach (StavkaRacuna name in stavke)
             {
                 sum += name.Proizvod.Cena * name.Kolicina;
